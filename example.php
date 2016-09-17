@@ -14,7 +14,7 @@ class SaveAllPathListener extends PathAwareJsonListener {
 
 	public function gotValue(array $path, $value) {
 		if (array_slice($path, 0, 2) == ['users', 'rudie']) {
-			$this->setValue($this->value, array_slice($path, 2), $value);
+			$this->rememberValue(array_slice($path, 2), $value);
 		}
 	}
 

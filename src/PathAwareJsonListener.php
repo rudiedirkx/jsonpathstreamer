@@ -106,6 +106,13 @@ abstract class PathAwareJsonListener extends IdleListener {
 	}
 
 	/**
+	 * Remember a value into the provided value property.
+	 */
+	protected function rememberValue(array $path, $value) {
+		$this->setValue($this->value, $path, $value);
+	}
+
+	/**
 	 * Return the entire saved value.
 	 */
 	public function getValue() {
