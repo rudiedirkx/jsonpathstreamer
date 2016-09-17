@@ -1,0 +1,21 @@
+{
+    "name": "rdx/jsonpath",
+    "description": "JSON streaming",
+    "type": "library",
+    "require": {
+        "salsify/json-streaming-parser": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "rdx\\jsonpath\\": "src"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rudie Dirkx",
+            "email": "github@hotblocks.nl"
+        }
+    ],
+    "minimum-stability": "dev"
+}
