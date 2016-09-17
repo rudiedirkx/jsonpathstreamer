@@ -1,6 +1,6 @@
 <?php
 
-use rdx\jsonpath\PathAwareJsonListener;
+use rdx\jsonpathstreamer\PathAwareJsonListener;
 
 require __DIR__ . '/vendor/autoload.php';
 

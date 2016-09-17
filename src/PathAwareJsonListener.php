@@ -1,6 +1,6 @@
 <?php
 
-namespace rdx\jsonpath;
+namespace rdx\jsonpathstreamer;
 
 use JsonStreamingParser\Listener\IdleListener;
 
