@@ -1,0 +1,9 @@
+{
+	"users": {
+		"rudie": {"name": "Rudie", "save": false, "num": 14, "things": ["abc", 100.5, ["y", "n"], {"a": "b", "c": [[[{"d": "e"}]]]}]},
+		"jaap": {"name": "Jaap", "save": true, "num": 13, "things": ["foo", "bar"]},
+		"mary": {"name": "Mary", "save": true, "num": 19, "things": [{}]},
+		"jenny": {"name": "Jenny", "save": false, "num": 65, "things": [{"secret": "secret"}]}
+	},
+	"faves": [12, 15, 18]
+}

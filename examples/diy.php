@@ -1,12 +1,11 @@
 <?php
 
+use JsonStreamingParser\Parser;
 use rdx\jsonpathstreamer\PathAwareJsonListener;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 class SaveAllPathListener extends PathAwareJsonListener {
-
-	protected $value = [];
 
 	public function gotPath(array $path) {
 		echo implode(' > ', $path) . "\n";
@@ -26,7 +25,7 @@ $stream = fopen('example.json', 'r');
 
 $listener = new SaveAllPathListener;
 
-$parser = new \JsonStreamingParser\Parser($stream, $listener);
+$parser = new Parser($stream, $listener);
 $parser->parse();
 
 echo "\n\n";

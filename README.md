@@ -36,4 +36,13 @@ DIY - Surgical precision
 Configurable - Probably less space efficient
 ----
 
-@TODO
+	// MUST implement getRules()
+	class MyListener extends \rdx\jsonpathstreamer\RegexConfigJsonListener {
+		public function getRules() {
+			// Save only "num" and "name" from all users
+			return [
+				'#^users/[^/]+/(num|name)(/|$)#',
+			];
+		}
+	}
+

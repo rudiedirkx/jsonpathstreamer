@@ -6,6 +6,8 @@ use JsonStreamingParser\Listener\IdleListener;
 
 abstract class PathAwareJsonListener extends IdleListener {
 
+	protected $value = [];
+
 	protected $indent = -1;
 	protected $array = [false];
 	protected $array_index = [-1];
@@ -121,11 +123,15 @@ abstract class PathAwareJsonListener extends IdleListener {
 
 	/**
 	 * Get notified about a new key, value still unknown.
+	 *
+	 * @return void
 	 */
 	abstract public function gotPath(array $path);
 
 	/**
 	 * Get notified about a new value, including complete path.
+	 *
+	 * @return void
 	 */
 	abstract public function gotValue(array $path, $value);
 
