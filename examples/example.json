@@ -5,5 +5,10 @@
 		"mary": {"name": "Mary", "save": true, "num": 19, "things": [{}]},
 		"jenny": {"name": "Jenny", "save": false, "num": 65, "things": [{"secret": "secret"}]}
 	},
+	"offices": {
+		"first": {"name": "First", "street": "1st street"},
+		"second": {"name": "Second", "street": "2nd street"},
+		"third": {"name": "Third", "street": "3rd street"}
+	},
 	"faves": [12, 15, 18]
 }
