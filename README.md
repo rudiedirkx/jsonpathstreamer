@@ -11,7 +11,7 @@ an interface for that. For very simple JSON parsing, there's
 even a configurable method, without any more parse/JSON
 formatting logic.
 
-See `examples/` for more examples.
+See `examples/` for more examples. Run `examples/speed.php` for a speed comparison.
 
 DIY - Surgical precision
 ----
@@ -33,15 +33,30 @@ DIY - Surgical precision
 		}
 	}
 
-Configurable - Probably less space efficient
+Configurable - easy
 ----
 
 	// MUST implement getRules()
 	class MyListener extends \rdx\jsonpathstreamer\RegexConfigJsonListener {
 		public function getRules() {
-			// Save only "num" and "name" from all users
+			// Save only "name", for all users into their original position
 			return [
-				'#^users/[^/]+/(num|name)(/|$)#',
+				'#^users/[^/]+/(name)(/|$)#',
+				'#^offices/[^/]+/(name)(/|$)#',
+			];
+		}
+	}
+
+Configurable - conversion
+----
+
+	// MUST implement getRules()
+	class MyListener extends RegexTargetConfigJsonListener {
+		public function getRules() {
+			// Save only "name", for all users and offices, into the same list
+			return [
+				'#^users/([^/]+)/(name)(/|$)#' => 'entities/$1/$2',
+				'#^offices/([^/]+)/(name)(/|$)#' => 'entities/$1/$2',
 			];
 		}
 	}

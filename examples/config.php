@@ -9,7 +9,8 @@ class SaveAllPathListener extends RegexConfigJsonListener {
 
 	public function getRules() {
 		return [
-			'#^users/[^/]+/(num|name)(/|$)#',
+			'#^users/[^/]+/(name)(/|$)#',
+			'#^offices/[^/]+/(name)(/|$)#',
 		];
 	}
 
