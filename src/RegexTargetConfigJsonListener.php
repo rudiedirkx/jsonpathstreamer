@@ -20,17 +20,17 @@ abstract class RegexTargetConfigJsonListener extends PathAwareJsonListener {
 	/**
 	 * Implements PathAwareJsonListener::gotPath().
 	 */
-	public function gotPath(array $path) {
+	public function gotPath( array $path ) {
 		// Ignore empty non-scalars
 	}
 
 	/**
 	 * Implements PathAwareJsonListener::gotValue().
 	 */
-	public function gotValue(array $path, $value) {
-		foreach ($this->regexes as $regex => $target) {
+	public function gotValue( array $path, $value ) {
+		foreach ( $this->regexes as $regex => $target ) {
 			$pathString = implode($this->separator, $path);
-			if (($targetString = preg_replace($regex, $target, $pathString)) != $pathString) {
+			if ( ($targetString = preg_replace($regex, $target, $pathString)) != $pathString ) {
 				$target = explode($this->separator, $targetString);
 				return $this->rememberValue($target, $value);
 			}

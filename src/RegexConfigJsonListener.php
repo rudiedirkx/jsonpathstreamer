@@ -20,16 +20,16 @@ abstract class RegexConfigJsonListener extends PathAwareJsonListener {
 	/**
 	 * Implements PathAwareJsonListener::gotPath().
 	 */
-	public function gotPath(array $path) {
+	public function gotPath( array $path ) {
 		// Ignore empty non-scalars
 	}
 
 	/**
 	 * Implements PathAwareJsonListener::gotValue().
 	 */
-	public function gotValue(array $path, $value) {
-		foreach ($this->regexes as $regex) {
-			if (preg_match($regex, implode($this->separator, $path))) {
+	public function gotValue( array $path, $value ) {
+		foreach ( $this->regexes as $regex ) {
+			if ( preg_match($regex, implode($this->separator, $path)) ) {
 				return $this->rememberValue($path, $value);
 			}
 		}

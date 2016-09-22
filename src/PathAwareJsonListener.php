@@ -22,7 +22,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	 *
 	 */
 	public function __construct() {
-		if ($regexes = $this->stopAfter()) {
+		if ( $regexes = $this->stopAfter() ) {
 			$this->stopAfter = array_combine($regexes, array_fill(0, count($regexes), false));
 		}
 	}
@@ -31,7 +31,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	 * Implements JsonStreamingParser\Listener::endDocument().
 	 */
 	public function endDocument() {
-		if (!empty($this->stopAfter)) {
+		if ( !empty($this->stopAfter) ) {
 			$this->stop(false);
 		}
 	}
@@ -44,7 +44,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 
 		$this->indent++;
 		$this->array[$this->indent] = false;
-		if ($this->lastKey !== null) {
+		if ( $this->lastKey !== null ) {
 			$this->trace[] = $this->lastKey;
 		}
 	}
@@ -66,7 +66,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 		$this->indent++;
 		$this->array[$this->indent] = true;
 		$this->array_index[$this->indent] = -1;
-		if ($this->lastKey !== null) {
+		if ( $this->lastKey !== null ) {
 			$this->trace[] = $this->lastKey;
 		}
 	}
@@ -83,7 +83,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::key().
 	 */
-	public function key($key) {
+	public function key( $key ) {
 		$this->lastKey = $key;
 		$this->composeKey();
 
@@ -93,7 +93,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::value().
 	 */
-	public function value($value) {
+	public function value( $value ) {
 		$this->arrayKey();
 		$this->composeKey();
 
@@ -103,19 +103,19 @@ abstract class PathAwareJsonListener extends IdleListener {
 	}
 
 	/**
-	 *
+	 * Remember this path was visited, to know when it's been parsed completely.
 	 */
-	protected function touch(array $path) {
-		if ($this->stopAfter) {
+	protected function touch( array $path ) {
+		if ( !empty($this->stopAfter) ) {
 			$pathString = implode($this->separator, $path);
-			foreach ($this->stopAfter as $regex => &$touched) {
-				if (preg_match($regex, $pathString)) {
+			foreach ( $this->stopAfter as $regex => &$touched ) {
+				if ( preg_match($regex, $pathString) ) {
 					$touched = true;
 				}
-				elseif ($touched) {
+				elseif ( $touched ) {
 					unset($this->stopAfter[$regex]);
 
-					if (empty($this->stopAfter)) {
+					if ( empty($this->stopAfter) ) {
 						$this->stop(true);
 					}
 				}
@@ -126,9 +126,11 @@ abstract class PathAwareJsonListener extends IdleListener {
 	}
 
 	/**
+	 * Stop parsing entirely.
 	 *
+	 * @throws DoneParsingException
 	 */
-	protected function stop($allTouched) {
+	protected function stop( $allTouched ) {
 		throw new DoneParsingException($allTouched);
 	}
 
@@ -143,7 +145,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	 * Trigger a new key, numeric or associative.
 	 */
 	protected function arrayKey() {
-		if (!empty($this->array[$this->indent])) {
+		if ( !empty($this->array[$this->indent]) ) {
 			$this->array_index[$this->indent]++;
 			$this->key($this->array_index[$this->indent]);
 		}
@@ -152,10 +154,10 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Optional helper to save a scalar value into a non-scalar path.
 	 */
-	protected function setValue(array &$container, array $key, $value) {
+	protected function setValue( array &$container, array $key, $value ) {
 		$element = &$container;
-		foreach ($key as $subkey) {
-			$element =& $element[$subkey];
+		foreach ( $key as $subkey ) {
+			$element = &$element[$subkey];
 		}
 		$element = $value;
 	}
@@ -163,7 +165,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Remember a value into the provided value property.
 	 */
-	protected function rememberValue(array $path, $value) {
+	protected function rememberValue( array $path, $value ) {
 		$this->setValue($this->value, $path, $value);
 	}
 
@@ -189,13 +191,13 @@ abstract class PathAwareJsonListener extends IdleListener {
 	 *
 	 * @return void
 	 */
-	abstract public function gotPath(array $path);
+	abstract public function gotPath( array $path );
 
 	/**
 	 * Get notified about a new value, including complete path.
 	 *
 	 * @return void
 	 */
-	abstract public function gotValue(array $path, $value);
+	abstract public function gotValue( array $path, $value );
 
 }
