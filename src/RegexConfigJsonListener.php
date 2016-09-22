@@ -7,12 +7,13 @@ use rdx\jsonpathstreamer\PathAwareJsonListener;
 abstract class RegexConfigJsonListener extends PathAwareJsonListener {
 
 	protected $regexes = [];
-	protected $separator = '/';
 
 	/**
-	 * Implements JsonStreamingParser\Listener::startDocument().
+	 *
 	 */
-	public function startDocument() {
+	public function __construct() {
+		parent::__construct();
+
 		$this->regexes = $this->getRules();
 	}
 

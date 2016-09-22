@@ -31,6 +31,12 @@ DIY - Surgical precision
 				}
 			}
 		}
+
+		// Optional
+		public function stopAfter() {
+			// Stop parsing after foo/bar because there's nothing I want there
+			return ['#foo/bar/#'];
+		}
 	}
 
 Configurable - easy
@@ -51,7 +57,7 @@ Configurable - conversion
 ----
 
 	// MUST implement getRules()
-	class MyListener extends RegexTargetConfigJsonListener {
+	class MyListener extends \rdx\jsonpathstreamer\RegexTargetConfigJsonListener {
 		public function getRules() {
 			// Save only "name", for all users and offices, into the same list
 			return [
