@@ -9,6 +9,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	protected $stopAfter = [];
 	protected $separator = '/';
 
+	protected $path = [];
 	protected $value = [];
 
 	protected $indent = -1;
