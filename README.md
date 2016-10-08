@@ -1,6 +1,9 @@
 JSON Path Streamer
 ====
 
+[![Build Status](https://travis-ci.org/rudiedirkx/jsonpathstreamer.svg?branch=master)](https://travis-ci.org/rudiedirkx/jsonpathstreamer)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/rudiedirkx/jsonpathstreamer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/rudiedirkx/jsonpathstreamer/?branch=master)
+
 Uses [salsify/jsonstreamingparser](https://github.com/salsify/jsonstreamingparser)
 to parse a JSON file, and stream its tokens. This package adds
 features to simplify that process.
