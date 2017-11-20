@@ -26,7 +26,7 @@ echo "\n" . number_format(memory_get_peak_usage() / 1e6) . " MB\n";
 exit;
 /**/
 
-$stream = fopen('jira.json', 'r');
+$stream = fopen(__DIR__ . '/jira.json', 'r');
 
 $listener = new SaveAllPathListener;
 

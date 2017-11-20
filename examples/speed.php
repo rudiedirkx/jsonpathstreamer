@@ -23,7 +23,7 @@ header('Content-type: text/plain');
 // Streaming
 $_time = microtime(1);
 
-$stream = fopen('example.json', 'r');
+$stream = fopen(__DIR__ . '/example.json', 'r');
 
 $listener = new SaveAllPathListener;
 

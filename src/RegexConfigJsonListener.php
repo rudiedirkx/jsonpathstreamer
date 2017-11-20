@@ -2,8 +2,6 @@
 
 namespace rdx\jsonpathstreamer;
 
-use rdx\jsonpathstreamer\PathAwareJsonListener;
-
 abstract class RegexConfigJsonListener extends PathAwareJsonListener {
 
 	protected $regexes = [];

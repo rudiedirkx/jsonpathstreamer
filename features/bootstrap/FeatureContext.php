@@ -1,9 +1,7 @@
 <?php
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -12,11 +10,14 @@ use Symfony\Component\Process\Process;
  */
 class FeatureContext implements Context {
 
-	/**
-	 */
-	public function __construct() {
-
-	}
+	/** @var string */
+	protected $phpBin;
+	/** @var Process */
+	protected $process;
+	/** @var string */
+	protected $workingDir;
+	/** @var array */
+	protected $result;
 
 	/**
 	 * Cleans test folders in the temporary directory.
@@ -69,6 +70,8 @@ class FeatureContext implements Context {
 			'',
 			'require "' . dirname(dirname(__DIR__)) . '/vendor/autoload.php";',
 			'',
+			'set_error_handler(function($errno, $error) { throw new ErrorException($error, $errno); });',
+			'',
 			(string) $string,
 			'',
 			'$stream = fopen(__DIR__ . "/data.json", "r");',
@@ -104,15 +107,10 @@ class FeatureContext implements Context {
 
 		$exitCode = $this->process->getExitCode();
 		if ($exitCode != 0) {
-			throw new Exception('Exit code not 0, but ' . $exitCode);
+			throw new Exception('Exit code not 0, but ' . $exitCode . ': ' . $output);
 		}
 
-		$data = $this->decodeJSON($output);
-		if (!is_array($data)) {
-			throw new Exception('Output is not JSON parsable');
-		}
-
-		$this->result = $data;
+		$this->result = $this->decodeJSON($output);
 	}
 
 	/**
@@ -134,7 +132,11 @@ class FeatureContext implements Context {
 	 *
 	 */
 	protected function decodeJSON($json) {
-		return json_decode((string) $json, TRUE);
+		$data = json_decode((string) $json, true);
+		if (!is_array($data)) {
+			throw new Exception('Output is not JSON parsable: ' . $json);
+		}
+		return $data;
 	}
 
 	/**

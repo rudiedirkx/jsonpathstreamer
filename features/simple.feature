@@ -25,7 +25,7 @@ Feature: Simple parsing
 			}
 			"""
 
-	Scenario: Return users' names
+	Scenario: Return users' names 2D
 		Given I have a listener
 			"""
 			class Listener extends \rdx\jsonpathstreamer\RegexConfigJsonListener {
@@ -45,6 +45,30 @@ Feature: Simple parsing
 					{"name": "Mary"},
 					{"name": "Nicole"},
 					{"name": "Jim"}
+				]
+			}
+			"""
+
+	Scenario: Return users' names 1D
+		Given I have a listener
+			"""
+			class Listener extends \rdx\jsonpathstreamer\RegexTargetConfigJsonListener {
+				public function getRules() {
+					return [
+						'#^users/(\d+)/name$#' => 'users/$1',
+					];
+				}
+			}
+			"""
+		When I run the streamer
+		Then I should have
+			"""
+			{
+				"users": [
+					"Jeff",
+					"Mary",
+					"Nicole",
+					"Jim"
 				]
 			}
 			"""

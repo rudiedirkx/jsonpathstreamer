@@ -21,7 +21,7 @@ class SaveAllPathListener extends PathAwareJsonListener {
 
 header('Content-type: text/plain');
 
-$stream = fopen('example.json', 'r');
+$stream = fopen(__DIR__ . '/example.json', 'r');
 
 $listener = new SaveAllPathListener;
 
