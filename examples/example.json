@@ -10,5 +10,10 @@
 		"second": {"name": "Second", "street": "2nd street"},
 		"third": {"name": "Third", "street": "3rd street"}
 	},
+	"objects": [
+		{"foo": "bar"},
+		{"foo": "baz"},
+		{"foo": "barz"}
+	],
 	"faves": [12, 15, 18]
 }
