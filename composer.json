@@ -17,7 +17,6 @@
             "email": "github@hotblocks.nl"
         }
     ],
-    "minimum-stability": "dev",
     "require-dev": {
         "behat/behat": "^3.2",
         "symfony/process": "^3.1"
