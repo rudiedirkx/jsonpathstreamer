@@ -37,7 +37,8 @@ $parser->parse();
 
 $_time = microtime(1) - $_time;
 
-print_r($listener->getValue());
+print_r($value = $listener->getValue());
 
-echo "\n" . number_format(memory_get_peak_usage() / 1e6) . " MB\n";
+echo "\nOriginal " . round(filesize(__DIR__ . '/jira.json') / 1024) . ' KB vs streamed ' . round(strlen(json_encode($value)) / 1024) . " KB\n";
+echo "\n" . number_format(memory_get_peak_usage() / 1e6) . " MB mem\n";
 echo "\n" . number_format($_time * 1000, 1) . " ms\n";
