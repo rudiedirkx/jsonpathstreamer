@@ -49,7 +49,6 @@ class FeatureContext implements Context {
 		}
 
 		$this->phpBin = $php;
-		$this->process = new Process(null);
 	}
 
 
@@ -90,14 +89,11 @@ class FeatureContext implements Context {
 	 * @When I run the streamer
 	 */
 	public function iRunTheStreamer() {
-		$this->process->setWorkingDirectory($this->workingDir);
-
-		$command = sprintf(
-			'%s %s',
+		$this->process = new Process([
 			$this->phpBin,
-			'data.php'
-		);
-		$this->process->setCommandLine($command);
+			'data.php',
+		]);
+		$this->process->setWorkingDirectory($this->workingDir);
 
 		$this->process->start();
 		$this->process->wait();

@@ -31,7 +31,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::endDocument().
 	 */
-	public function endDocument() {
+	public function endDocument() : void {
 		if ( !empty($this->stopAfter) ) {
 			$this->stop(false);
 		}
@@ -40,7 +40,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::startObject().
 	 */
-	public function startObject() {
+	public function startObject() : void {
 		$this->arrayKey();
 
 		$this->indent++;
@@ -53,7 +53,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::endObject().
 	 */
-	public function endObject() {
+	public function endObject() : void {
 		$this->indent--;
 		array_pop($this->trace);
 	}
@@ -61,7 +61,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::startArray().
 	 */
-	public function startArray() {
+	public function startArray() : void {
 		$this->arrayKey();
 
 		$this->indent++;
@@ -75,7 +75,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::endArray().
 	 */
-	public function endArray() {
+	public function endArray() : void {
 		$this->array[$this->indent] = false;
 		$this->indent--;
 		array_pop($this->trace);
@@ -84,7 +84,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::key().
 	 */
-	public function key( $key ) {
+	public function key( string $key ) : void {
 		$this->lastKey = $key;
 		$this->composeKey();
 
@@ -94,7 +94,7 @@ abstract class PathAwareJsonListener extends IdleListener {
 	/**
 	 * Implements JsonStreamingParser\Listener::value().
 	 */
-	public function value( $value ) {
+	public function value( $value ) : void {
 		$this->arrayKey();
 		$this->composeKey();
 

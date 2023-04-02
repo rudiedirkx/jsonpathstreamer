@@ -15,13 +15,13 @@ class SaveAllPathListener extends PathAwareJsonListener {
 		// echo implode(' > ', $path) . "\n";
 	}
 
-	public function startObject() {
+	public function startObject() : void {
 		parent::startObject();
 echo "  object\n";
 echo "> " . implode(' > ', $this->path) . "\n\n";
 	}
 
-	public function endObject() {
+	public function endObject() : void {
 		// @todo Keep keeping track of path after closing objects/arrays
 		$this->composeKey();
 

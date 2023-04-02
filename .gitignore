@@ -1,3 +1,4 @@
 vendor/
 composer.lock
 examples/jira.json
+examples/citylots.json

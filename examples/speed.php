@@ -35,7 +35,7 @@ $time1 = number_format((microtime(1) - $_time) * 1000, 2);
 // Native decoding
 $_time = microtime(1);
 
-$value = json_decode(file_get_contents('example.json'), true);
+$value = json_decode(file_get_contents(__DIR__ . '/example.json'), true);
 
 $time2 = number_format((microtime(1) - $_time) * 1000, 2);
 
